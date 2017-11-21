@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/root/.android/build-cache/189c5ebe670d33e3799887669023fabe5812d3f9/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="2430e711762a749feb00b3d64858ca4768251b9d">
+        <dex dex="/root/AndroidStudioProjects/SGR/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7af9ef77df12acaf0d865c5bfc4882ea49e77fba/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/root/.android/build-cache/cc7613a1b3e0918640ec9e4639656c2a1334b474/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="fcae52a60bc07924d370b4d376116cd8f8581f54">
+        <dex dex="/root/AndroidStudioProjects/SGR/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_040c02034505b20d6c7d51408a2c48fc3d3bf17c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/root/AndroidStudioProjects/SGR/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/root/AndroidStudioProjects/SGR/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_99c909d7fb899017013b956f76d8dc3db569026d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/root/.android/build-cache/144f383dee3bd4505c28359798b6c04690475a3f/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="364364bf77b4a71afc5930fc3ae57b3f0eea637c">
+        <dex dex="/root/AndroidStudioProjects/SGR/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_cd6baa16d186d4df22ecc53926f22bfae6d0f483/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/root/.android/build-cache/f87da08e7b0ec7e63f8a5096c21759d0e644459b/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="70ffe00aaf049893f59d1dad57bd82992faa38ef">
+        <dex dex="/root/AndroidStudioProjects/SGR/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_afeb847c1f5e88f66a1cfdc8b0b35a5c7153910a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/root/AndroidStudioProjects/SGR/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="b76462553d960fdf8032ccd0e6ea54fb0ec0275b">
+        <dex dex="/root/AndroidStudioProjects/SGR/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_de7a3ffe65c9c3052ad61b11ba648126c408227e/classes.dex" />
+    </item>
+
+</items>

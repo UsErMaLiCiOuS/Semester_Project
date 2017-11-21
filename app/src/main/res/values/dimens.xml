@@ -1,0 +1,7 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="textSize">15sp</dimen>
+    <dimen name="welcomeText">50sp</dimen>
+    <dimen name="top_padding">50dp</dimen>
+</resources>
