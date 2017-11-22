@@ -6,6 +6,11 @@ package forfendsec.com.sgr;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -13,52 +18,72 @@ import android.widget.TextView;
 
 import java.util.List;
 
+public class Adapter extends RecyclerView.Adapter<Adapter.UserViewHolder> {
+    private List<Economy> trainList = null;
+    private List<Login> loginList;
 
 
-public class Adapter extends BaseAdapter {
-    private Context myContext;
-    private List<Economy> trainList;
-
-    public Adapter(Context myContext, List<Economy> trainList){
-        this.myContext = myContext;
+    public Adapter(List<Economy> trainList, List<Login> loginList) {
         this.trainList = trainList;
+        this.loginList = loginList;
     }
 
 
+
     @Override
-    public Object getItem(int position) {
-        return trainList.get(position);
+    public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        // inflating recycler item view
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.items, parent, false);
+
+        return new UserViewHolder(itemView);
     }
 
     @Override
-    public long getItemId(int position) {
-        return trainList.get(position).getId();
+    public void onBindViewHolder(UserViewHolder holder, int position) {
+        //**Train
+        holder.textViewName.setText(trainList.get(position).getTrain());
+        holder.textViewEmail.setText(trainList.get(position).getDestination());
+        holder.textViewPassword.setText(trainList.get(position).getSeats());
+        holder.textViewPassword.setText(trainList.get(position).getPrice());
+
+        //**Login
+        holder.textViewId.setText(loginList.get(position).getId());
+        holder.textViewPassword.setText(loginList.get(position).getPassword());
+
+
     }
 
-    @Override
-    public int getCount() {
+
+    public int getItemCount() {
+
+        Log.v(Adapter.class.getSimpleName(),"list"+trainList.size());
         return trainList.size();
     }
 
 
 
+    /**
+     * ViewHolder class
+     */
+    public class UserViewHolder extends RecyclerView.ViewHolder {
 
-    @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
-        @SuppressLint("ViewHolder") View v = View.inflate(myContext, R.layout.items,null);
-        TextView Train = v.findViewById(R.layout.id.train);
-        TextView Price = v.findViewById(R.layout.id.pimu);
-        TextView Destination = v.findViewById(R.layout.id.destination);
-        TextView Seats = v.findViewById(R.layout.id.seats);
+        public AppCompatTextView textViewName;
+        public AppCompatTextView textViewEmail;
+        public AppCompatTextView textViewPassword;
 
-        Train.setText(trainList.get(position).getTrain());
-        Price.setText(trainList.get(position).getPrice());
-        Destination.setText(trainList.get(position).getDestination());
-        Seats.setText(trainList.get(position).getSeats());
-        return v;
+        public UserViewHolder(View view) {
+            super(view);
+            textViewName = (AppCompatTextView) view.findViewById(R.id.textViewName);
+            textViewEmail = (AppCompatTextView) view.findViewById(R.id.textViewEmail);
+            textViewPassword = (AppCompatTextView) view.findViewById(R.id.textViewPassword);
+            textViewId = (AppCompatTextView) view.findViewById(R.id.National_ID);
+        }
     }
 
+
 }
+
 
 
 

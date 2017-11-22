@@ -432,6 +432,35 @@ public class DBHandler extends SQLiteOpenHelper {
         return db.update(TABLE_LOGIN, values, KEY_ID + "-?", new String[]{String.valueOf(login.getId())});
     }
 
+    public boolean checkUser(String email) {
+
+        String[] columns = {
+                KEY_EMAIL
+        };
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String selection = KEY_EMAIL + " = ?";
+
+        String[] selectionArgs = {email};
+
+        Cursor cursor = db.query(TABLE_LOGIN,
+                columns,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null);
+        int cursorCount = cursor.getCount();
+        cursor.close();
+        db.close();
+
+        if (cursorCount > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
     public int updateEconomy(Economy economy) {
         SQLiteDatabase db = this.getWritableDatabase();
 
