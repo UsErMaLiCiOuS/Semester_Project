@@ -52,7 +52,7 @@ public class Signup extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_signup);
         getSupportActionBar().hide();
 
-       /* Button register_button = findViewById(R.id.appCompatButtonRegister);
+        Button register_button = findViewById(R.id.appCompatButtonRegister);
         register_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,7 +60,7 @@ public class Signup extends AppCompatActivity implements View.OnClickListener{
                 startActivity(register);
 
             }
-        });*/
+        });
 
         TextView back_button = findViewById(R.id.appCompatTextViewLoginLink);
         back_button.setOnClickListener(new View.OnClickListener() {

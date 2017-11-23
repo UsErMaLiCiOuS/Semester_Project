@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">SGR_Kenya</string>
+    <string name="action_settings">Settings</string>
+
+
+    <string name="txtpassword">Wachtwoord</string>
+    <string name="login">Login</string>
+    <string name="create_account">Account aanmaken</string>
+    <string name="signup">Aanmelden</string>
+    <string name="username">Gebruikersnaam</string>
+    <string name="password">Wachtwoord</string>
+    <string name="firstname">Voornaam</string>
+    <string name="lastname">Achternaam</string>
+    <string name="signup_prompt">Heb je een account?</string>
+    <string name="Email">Email</string>
+    <string name="National_ID">Nationaal ID</string>
+    <string name="Welcome">Welkom</string>
+    <string name="title_activity_train_location">Kaart</string>
+    <string name="google_maps_key">google_kaart_sleutel</string>
+    <string name="Login_Activity">Login</string>
+    <string name="Home_Activity">Huis</string>
+    <string name="Create_Account_Activity">Account aanmaken</string>
+    <string name="Class_select_prompt">Selecteer een klasse naar keuze!</string>
+    <string name="Economy_Class">Economie les</string>
+    <string name="First_Class">Eerste klas</string>
+    <string name="Train">Trein</string>
+    <string name="Destination">Bestemming</string>
+    <string name="Seats">Zitplaatsen</string>
+    <string name="Price">Price</string>
+    <string name="Select_Class">Prijs</string>
+    <string name="InputValidation">Validatie van invoer</string>
+
+
+
+    <string name="text_accounts">Alle Konten</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Passwort</string>
+    <string name="hint_confirm_password">Bestätige das Passwort</string>
+    <string name="hint_id">Personalausweis</string>
+    <string name="text_login">Anmeldung</string>
+    <string name="text_register">Registrieren</string>
+    <string name="error_message_name">Vollständigen Namen eingeben</string>
+    <string name="error_message_email">Bitte gültige Emailadresse eingeben</string>
+    <string name="error_message_id">Geben Sie die gültige nationale ID ein</string>
+    <string name="error_message_age">Alter Eingeben</string>
+    <string name="error_message_password">Passwort Eingeben</string>
+    <string name="success_message">Registrierung Erfolgreich</string>
+    <string name="text_not_member"><b>Klick Hier</b> Konto erstellen</string>
+    <string name="text_already_member">Schon ein Mitglied? Anmeldung</string>
+    <string name="error_email_exists">Email Existiert Bereits</string>
+    <string name="error_password_match">Passwort stimmt nicht überein</string>
+    <string name="error_valid_email_password">Falsche Email oder Passwort</string>
+    <string name="text_hello">Hallo</string>
+    <string name="text_title">SGR Kenya</string>
+
+
+</resources>

@@ -50,6 +50,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         initListeners();
         initObjects();
 
+        TextView textView = new TextView(this);
+        textView.setText(R.string.text_login);
+        textView.setText(R.string.text_not_member);
+        textView.setText(R.string.hint_password);
+        textView.setText(R.string.hint_email);
+
+
         Button login_button = findViewById(R.id.Login);
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override

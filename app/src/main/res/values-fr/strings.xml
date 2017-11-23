@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">SGR_Kenya</string>
+    <string name="action_settings">Settings</string>
+
+
+    <string name="txtpassword">Password</string>
+    <string name="login">Login</string>
+    <string name="create_account">Create Account</string>
+    <string name="signup">SignUp</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="firstname">Firstname</string>
+    <string name="lastname">Lastname</string>
+    <string name="signup_prompt">Do you have an account?</string>
+    <string name="Email">Email</string>
+    <string name="National_ID">National_ID</string>
+    <string name="Welcome">Welcome</string>
+    <string name="title_activity_train_location">Map</string>
+    <string name="google_maps_key">google_maps_key</string>
+    <string name="Login_Activity">Login</string>
+    <string name="Home_Activity">Home</string>
+    <string name="Create_Account_Activity">Create Account</string>
+    <string name="Class_select_prompt">Please select a class of choice!</string>
+    <string name="Economy_Class">Economy Class</string>
+    <string name="First_Class">First Class</string>
+    <string name="Train">Train</string>
+    <string name="Destination">Destination</string>
+    <string name="Seats">Seats</string>
+    <string name="Price">Price</string>
+    <string name="Select_Class">Select Class</string>
+    <string name="InputValidation">Input Validation</string>
+
+
+
+    <string name="text_accounts">All Accounts</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="hint_id">National ID</string>
+    <string name="text_login">Login</string>
+    <string name="text_register">Register</string>
+    <string name="error_message_name">Enter Full Name</string>
+    <string name="error_message_email">Enter Valid Email</string>
+    <string name="error_message_id">Enter Valid National ID</string>
+    <string name="error_message_age">Enter Age</string>
+    <string name="error_message_password">Enter Password</string>
+    <string name="success_message">Registration Successful</string>
+    <string name="text_not_member"><b>Click Here</b> to Create Account</string>
+    <string name="text_already_member">Already a member? Login</string>
+    <string name="error_email_exists">Email Already Exists</string>
+    <string name="error_password_match">Password Does Not Matches</string>
+    <string name="error_valid_email_password">Wrong Email or Password</string>
+    <string name="text_hello">Hello,</string>
+    <string name="text_title">SGR Kenya</string>
+
+
+</resources>
