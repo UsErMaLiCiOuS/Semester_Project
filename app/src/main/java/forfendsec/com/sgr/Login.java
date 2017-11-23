@@ -6,13 +6,6 @@ package forfendsec.com.sgr;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -20,12 +13,9 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
-import android.util.Log;
 import android.view.View;
-
-import forfendsec.com.sgr.R;
-import forfendsec.com.sgr.InputValidation;
-import forfendsec.com.sgr.DBHandler;
+import android.widget.Button;
+import android.widget.TextView;
 
 
 public class Login extends AppCompatActivity implements View.OnClickListener{
@@ -40,13 +30,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private TextInputEditText textInputEditTextEmail;
     private TextInputEditText textInputEditTextPassword;
 
-    private AppCompatButton appCompatButtonLogin;
+    private AppCompatButton Login;
 
-    private AppCompatTextView textViewLinkRegister;
+    private AppCompatTextView Create;
 
     private InputValidation inputValidation;
     private DBHandler databaseHelper;
-    private Login textViewId;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,57 +50,66 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         initListeners();
         initObjects();
 
-        Button login_button = (Button) findViewById(R.id.Login);
+        Button login_button = findViewById(R.id.Login);
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Login.this, Home.class));
+                Intent login = new Intent(Login.this, Home.class);
+                startActivity(login);
+
             }
         });
 
-        Button create_button = (Button) findViewById(R.id.Create);
+        TextView create_button = findViewById(R.id.Create);
         create_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Login.this, Signup.class));
+                Intent create = new Intent(Login.this, Signup.class);
+                startActivity(create);
+
             }
         });
     }
 
 
 
-    int _id;
-    String password;
-
-    public Login(int id, String password) {
-        this._id = id;
-        this.password = password;
-    }
-
-    public Login(String password) {
-        this.password = password;
-    }
-
-    public Login() {
-
-    }
+    private int id;
+    private String name;
+    private String email;
+    private String password;
 
     public int getId() {
-        return this._id;
+        return id;
     }
 
     public void setId(int id) {
-        this._id = id;
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
-}
+
 
 
 
@@ -126,52 +126,42 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         textInputEditTextEmail = (TextInputEditText) findViewById(R.id.textInputEditTextEmail);
         textInputEditTextPassword = (TextInputEditText) findViewById(R.id.textInputEditTextPassword);
 
-        appCompatButtonLogin = (AppCompatButton) findViewById(R.id.appCompatButtonLogin);
+        Login = (AppCompatButton) findViewById(R.id.Login);
 
-        textViewLinkRegister = (AppCompatTextView) findViewById(R.id.textViewLinkRegister);
-        textViewId = (AppCompatTextView) findViewById(R.id.textViewId);
+        Create = (AppCompatTextView) findViewById(R.id.Create);
+
 
     }
 
-    /**
-     * This method is to initialize listeners
-     */
+
     private void initListeners() {
-        appCompatButtonLogin.setOnClickListener(this);
-        textViewLinkRegister.setOnClickListener(this);
+        Login.setOnClickListener(this);
+        Create.setOnClickListener(this);
     }
 
-    /**
-     * This method is to initialize objects to be used
-     */
+
     private void initObjects() {
         databaseHelper = new DBHandler(activity);
         inputValidation = new InputValidation(activity);
 
     }
 
-    /**
-     * This implemented method is to listen the click on view
-     *
-     * @param v
-     */
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.appCompatButtonLogin:
+            case R.id.Login:
                 verifyFromSQLite();
                 break;
-            case R.id.textViewLinkRegister:
-                // Navigate to RegisterActivity
+            case R.id.Create:
+
                 Intent intentRegister = new Intent(getApplicationContext(), Signup.class);
                 startActivity(intentRegister);
                 break;
         }
     }
 
-    /**
-     * This method is to validate the input text fields and verify login credentials from SQLite
-     */
+
     private void verifyFromSQLite() {
         if (!inputValidation.isInputEditTextFilled(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) {
             return;
@@ -194,14 +184,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
 
         } else {
-            // Snack Bar to show success message that record is wrong
+
             Snackbar.make(nestedScrollView, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show();
         }
     }
 
-    /**
-     * This method is to empty all input edit text
-     */
+
     private void emptyInputEditText() {
         textInputEditTextEmail.setText(null);
         textInputEditTextPassword.setText(null);

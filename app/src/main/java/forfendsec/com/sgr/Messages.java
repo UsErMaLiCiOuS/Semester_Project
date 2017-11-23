@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
  * Created by root on 11/1/17.
  */
 
+/*
 public class Messages extends AppCompatActivity{
 
     int _id;
@@ -61,4 +62,4 @@ public class Messages extends AppCompatActivity{
     public void setSms(String sms) {
         this.sms = sms;
     }
-}
+}*/

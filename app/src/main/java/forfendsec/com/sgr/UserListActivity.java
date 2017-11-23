@@ -34,24 +34,19 @@ public class UserListActivity extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_users_list);
+        setContentView(R.layout.items);
         getSupportActionBar().setTitle("");
         initViews();
         initObjects();
 
     }
 
-    /**
-     * This method is to initialize views
-     */
     private void initViews() {
         textViewName = (AppCompatTextView) findViewById(R.id.textViewName);
         recyclerViewUsers = (RecyclerView) findViewById(R.id.recyclerViewUsers);
     }
 
-    /**
-     * This method is to initialize objects to be used
-     */
+
     private void initObjects() {
         loginList = new ArrayList<>();
         usersRecyclerAdapter = new Adapter(loginList);
@@ -92,4 +87,4 @@ public class UserListActivity extends AppCompatActivity{
         }.execute();
     }
 }
-}
+

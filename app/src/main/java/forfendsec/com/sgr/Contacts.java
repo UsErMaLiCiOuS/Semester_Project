@@ -4,6 +4,7 @@ package forfendsec.com.sgr;
  * Created by root on 11/1/17.
  */
 
+/*
 public class Contacts {
 
     int _id;
@@ -47,3 +48,4 @@ public class Contacts {
 
 
 }
+*/

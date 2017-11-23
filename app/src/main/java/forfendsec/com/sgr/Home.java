@@ -27,8 +27,10 @@ public class Home extends AppCompatActivity {
                 startActivity(logout);
             }
         });
+    }
+}
 
-        ImageButton ticket_button = (ImageButton) findViewById(R.id.iconTicket);
+        /*ImageButton ticket_button = (ImageButton) findViewById(R.id.iconTicket);
         ticket_button.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -39,3 +41,4 @@ public class Home extends AppCompatActivity {
         });
     }
 }
+*/

@@ -19,20 +19,18 @@ import android.widget.TextView;
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.UserViewHolder> {
-    private List<Economy> trainList = null;
+    /*private List<Economy> trainList;*/
     private List<Login> loginList;
 
 
-    public Adapter(List<Economy> trainList, List<Login> loginList) {
-        this.trainList = trainList;
+    public Adapter(List<Login> loginList) {
         this.loginList = loginList;
     }
 
 
-
     @Override
     public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // inflating recycler item view
+
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.items, parent, false);
 
@@ -41,13 +39,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.UserViewHolder> {
 
     @Override
     public void onBindViewHolder(UserViewHolder holder, int position) {
-        //**Train
-        holder.textViewName.setText(trainList.get(position).getTrain());
-        holder.textViewEmail.setText(trainList.get(position).getDestination());
-        holder.textViewPassword.setText(trainList.get(position).getSeats());
-        holder.textViewPassword.setText(trainList.get(position).getPrice());
 
-        //**Login
         holder.textViewId.setText(loginList.get(position).getId());
         holder.textViewPassword.setText(loginList.get(position).getPassword());
 
@@ -57,27 +49,26 @@ public class Adapter extends RecyclerView.Adapter<Adapter.UserViewHolder> {
 
     public int getItemCount() {
 
-        Log.v(Adapter.class.getSimpleName(),"list"+trainList.size());
-        return trainList.size();
+        Log.v(Adapter.class.getSimpleName(),"list"+loginList.size());
+        return loginList.size();
     }
 
 
 
-    /**
-     * ViewHolder class
-     */
+
     public class UserViewHolder extends RecyclerView.ViewHolder {
 
         public AppCompatTextView textViewName;
         public AppCompatTextView textViewEmail;
         public AppCompatTextView textViewPassword;
+        public AppCompatTextView textViewId;
 
         public UserViewHolder(View view) {
             super(view);
             textViewName = (AppCompatTextView) view.findViewById(R.id.textViewName);
             textViewEmail = (AppCompatTextView) view.findViewById(R.id.textViewEmail);
             textViewPassword = (AppCompatTextView) view.findViewById(R.id.textViewPassword);
-            textViewId = (AppCompatTextView) view.findViewById(R.id.National_ID);
+            textViewId = (AppCompatTextView) view.findViewById(R.id.textViewId);
         }
     }
 
