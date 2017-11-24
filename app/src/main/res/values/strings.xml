@@ -54,4 +54,13 @@
     <string name="text_hello" translatable="false">Hello,</string>
 
 
+    <string name="title_activity_second_activity">Interstitial</string>
+    <string name="msg_welcome">Welcome to the SGR App, Click on the button to launch the Interstitial ad.</string>
+    <string name="btn_fullscreen_ad">Show Fullscreen Ad</string>
+
+    <string name="banner_hotel">ca-app-pub-1093144503922289/4436428564</string>
+    <string name="hotel_billboard">ca-app-pub-1093144503922289/7138613527</string>
+
+
+
 </resources>
