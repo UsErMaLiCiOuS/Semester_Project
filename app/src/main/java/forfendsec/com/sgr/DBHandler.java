@@ -19,7 +19,7 @@ import forfendsec.com.sgr.Login;
 
 public class DBHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static final String DATABASE_NAME = "sgr.db";
 
@@ -27,7 +27,7 @@ public class DBHandler extends SQLiteOpenHelper {
     //private static final String TABLE_MESSAGES = "messages";
     //private static final String TABLE_SIGNUP = "signup";
     private static final String TABLE_LOGIN = "login";
-    //private static final String TABLE_ECONOMY ="economy";
+    private static final String TABLE_ECONOMY ="economy";
 
 
     private static final String KEY_ID = "id";
@@ -40,12 +40,12 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String KEY_EMAIL = "email";
     private static final String KEY_PASSWORD = "password";
 
-    /*private static final String KEY_TRAIN_ID ="_train_id";
+    private static final String KEY_TRAIN_ID ="_train_id";
     private static final String KEY_TRAIN = "train";
     private static final String KEY_DESTINATION = "destination";
     private static final String KEY_SEAT = "seat";
     private static final String KEY_PRICE = "price";
-*/
+
 
 
     /*private static final String CREATE_TABLE_CONTACTS = "CREATE TABLE "
@@ -69,10 +69,10 @@ public class DBHandler extends SQLiteOpenHelper {
             + KEY_PASSWORD + " TEXT" + ")";
 
 
-   /* private static final String CREATE_TABLE_ECONOMY = "CREATE TABLE "
+   private static final String CREATE_TABLE_ECONOMY = "CREATE TABLE "
             + TABLE_ECONOMY + "(" + KEY_TRAIN_ID + " INTEGER PRIMARY KEY," + KEY_TRAIN
             + " TEXT," + KEY_DESTINATION + " TEXT," + KEY_SEAT + " TEXT,"
-            + KEY_PRICE + " TEXT" + ")";*/
+            + KEY_PRICE + " TEXT" + ")";
 
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -81,11 +81,11 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        /*sqLiteDatabase.execSQL(CREATE_TABLE_CONTACTS);
-        sqLiteDatabase.execSQL(CREATE_TABLE_MESSAGES);
-        sqLiteDatabase.execSQL(CREATE_TABLE_SIGNUP);*/
+        //sqLiteDatabase.execSQL(CREATE_TABLE_CONTACTS);
+        //sqLiteDatabase.execSQL(CREATE_TABLE_MESSAGES);
+        //sqLiteDatabase.execSQL(CREATE_TABLE_SIGNUP);
         sqLiteDatabase.execSQL(CREATE_TABLE_LOGIN);
-        //sqLiteDatabase.execSQL(CREATE_TABLE_ECONOMY);
+        sqLiteDatabase.execSQL(CREATE_TABLE_ECONOMY);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class DBHandler extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_MESSAGES);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_SIGNUP);*/
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_LOGIN);
-        //sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_ECONOMY);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_ECONOMY);
 
         onCreate(sqLiteDatabase);
 
@@ -150,7 +150,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
-    /*public void addEconomy(Economy economy) {
+    public void addEconomy(Economy economy) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -162,7 +162,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         sqLiteDatabase.insert(TABLE_ECONOMY, null, values);
         sqLiteDatabase.close();
-    }*/
+    }
 
 
     /*public Contacts getContact(int id) {
@@ -210,7 +210,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }*/
 
 
-    /*public Economy getEconomy(int id) {
+    public Economy getEconomy(int id) {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -223,7 +223,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 cursor.getString(1),cursor.getString(2), cursor.getString(3),cursor.getString(4));
 
         return economy;
-    }*/
+    }
 
     /*public List<Contacts> getAllContacts() {
         List<Contacts> contactsList = new ArrayList<Contacts>();
@@ -327,28 +327,43 @@ public class DBHandler extends SQLiteOpenHelper {
         return loginList;
     }
 
-    /*public List<Economy> getAllEconomy() {
-        List<Economy> economyList = new ArrayList<Economy>();
+    public List<Economy> getAllEconomy() {
+        String[] columns = {
+                KEY_ID,
+                KEY_TRAIN,
+                KEY_DESTINATION,
+                KEY_PRICE,
+                KEY_SEAT
+        };
 
-        String selectQuery = "SELECT * FROM " + TABLE_ECONOMY;
+        String sortOrder =
+                KEY_TRAIN + " ASC";
+        List<Economy> economyList = new ArrayList<>();
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        SQLiteDatabase db = this.getReadableDatabase();
+
+
+        Cursor cursor = db.query(TABLE_ECONOMY, columns,null, null, null, null, sortOrder);
+
+
 
         if (cursor.moveToFirst()) {
             do {
                 Economy economy = new Economy();
-                economy.setId(Integer.parseInt(cursor.getString(0)));
-                economy.setTrain(cursor.getString(1));
-                economy.setDestination(cursor.getString(2));
-                economy.setSeats(cursor.getString(3));
-                economy.setPrice(cursor.getString(4));
+                economy.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))));
+                economy.setTrain(cursor.getString(cursor.getColumnIndex(KEY_TRAIN)));
+                economy.setDestination(cursor.getString(cursor.getColumnIndex(KEY_DESTINATION)));
+                economy.setPrice(cursor.getString(cursor.getColumnIndex(KEY_PRICE)));
+                economy.setSeats(cursor.getString(cursor.getColumnIndex(KEY_SEAT)));
 
                 economyList.add(economy);
             } while (cursor.moveToNext());
         }
+        cursor.close();
+        db.close();
+
         return economyList;
-    }*/
+    }
 
     /*public int getContactsCount() {
         String countQuery = "SELECT * FROM " + TABLE_CONTACTS;
@@ -377,23 +392,23 @@ public class DBHandler extends SQLiteOpenHelper {
         return cursor.getCount();
     }*/
 
-    /*public int getLoginCount() {
+    public int getLoginCount() {
         String countQuery = "SELECT * FROM " + TABLE_LOGIN;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         cursor.close();
 
         return cursor.getCount();
-    }*/
+    }
 
-    /*public int getEconomyCount() {
+    public int getEconomyCount() {
         String countQuery = "SELECT * FROM " + TABLE_ECONOMY;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         cursor.close();
 
         return cursor.getCount();
-    }*/
+    }
 
     /*public int updateContact(Contacts contacts) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -440,7 +455,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    /*public int updateEconomy(Economy economy) {
+    public int updateEconomy(Economy economy) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -450,7 +465,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_PRICE, economy.getPrice());
 
         return db.update(TABLE_ECONOMY, values, KEY_TRAIN_ID + "-?", new String[]{String.valueOf(economy.getId())});
-    }*/
+    }
 
     public boolean checkUser(String email) {
 
@@ -476,6 +491,38 @@ public class DBHandler extends SQLiteOpenHelper {
 
         return false;
     }
+
+
+
+
+    public boolean checkTrains(String name, String destination, String price, String seats) {
+
+        String[] columns = {
+                KEY_ID
+        };
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String selection = KEY_TRAIN + " = ?," + " AND " + KEY_DESTINATION + " = ?," + " AND " + KEY_PRICE + " = ?," + " AND " + KEY_SEAT + " = ?";
+
+        String[] selectionArgs = {name, destination, price, seats};
+
+        Cursor cursor = db.query(TABLE_ECONOMY, columns, selection, selectionArgs, null, null, null);
+
+
+        int cursorCount = cursor.getCount();
+        cursor.close();
+        db.close();
+
+        if (cursorCount > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+
+
 
     public boolean checkUser(String email, String password) {
 
@@ -506,6 +553,8 @@ public class DBHandler extends SQLiteOpenHelper {
 
 
 
+
+
     /*public void deleteSignUp(Signup signup) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_SIGNUP, KEY_ID + "= ?", new String[]{String.valueOf(signup.getId())});
@@ -520,12 +569,12 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    /*public void deleteEconomy(Economy economy) {
+    public void deleteEconomy(Economy economy) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_ECONOMY, KEY_TRAIN_ID + "= ?", new String[]{String.valueOf(economy.getId())});
 
         db.close();
-    }*/
+    }
 
 }
 

@@ -13,7 +13,7 @@ import java.util.List;
  * Created by Joshua Munaweza on 11/16/17.
  */
 
-/*public class ClassSelection extends AppCompatActivity{
+public class ClassSelection extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,4 +31,4 @@ import java.util.List;
         });
 
     }
-}*/
+}

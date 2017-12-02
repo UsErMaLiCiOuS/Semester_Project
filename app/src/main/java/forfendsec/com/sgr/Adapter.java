@@ -19,9 +19,7 @@ import android.widget.TextView;
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.UserViewHolder> {
-    /*private List<Economy> trainList;*/
     private List<Login> loginList;
-
 
     public Adapter(List<Login> loginList) {
         this.loginList = loginList;
@@ -44,6 +42,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.UserViewHolder> {
         holder.textViewPassword.setText(loginList.get(position).getPassword());
 
 
+
+
     }
 
 
@@ -51,6 +51,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.UserViewHolder> {
 
         Log.v(Adapter.class.getSimpleName(),"list"+loginList.size());
         return loginList.size();
+
     }
 
 
@@ -61,14 +62,20 @@ public class Adapter extends RecyclerView.Adapter<Adapter.UserViewHolder> {
         public AppCompatTextView textViewName;
         public AppCompatTextView textViewEmail;
         public AppCompatTextView textViewPassword;
+
         public AppCompatTextView textViewId;
+
+
 
         public UserViewHolder(View view) {
             super(view);
+            textViewId = (AppCompatTextView) view.findViewById(R.id.textViewId);
+
             textViewName = (AppCompatTextView) view.findViewById(R.id.textViewName);
             textViewEmail = (AppCompatTextView) view.findViewById(R.id.textViewEmail);
             textViewPassword = (AppCompatTextView) view.findViewById(R.id.textViewPassword);
-            textViewId = (AppCompatTextView) view.findViewById(R.id.textViewId);
+
+
         }
     }
 

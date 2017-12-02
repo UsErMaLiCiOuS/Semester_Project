@@ -11,11 +11,11 @@ import android.widget.ListView;
 
 import java.util.List;
 
-/*public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private ListView listData;
     private Adapter displayData;
-    *//*private List<Messages> grubData;*//*
+    private List<Economy> grubData;
     private DBHandler dumpDB;
 
     @Override
@@ -44,7 +44,7 @@ import java.util.List;
         });
 
 
-        DBHandler db = new DBHandler(this);*/
+        DBHandler db = new DBHandler(this);
 
         /*Log.d("Insert: ", "Inserting....");
         db.addContact(new Contacts("Joshua", "9100000000"));
@@ -69,11 +69,11 @@ import java.util.List;
         db.addLogin(new Login(34456653, "Battlefield3Rules"));*/
 
 
-        /*db.addEconomy(new Economy(2541,"Madaraka Express", "Nairobi-Mombasa", "17", "700"));
-        db.addEconomy(new Economy(2542,"Mariakani Express", "Mariakani-Nairobi", "33", "700"));
-        db.addEconomy(new Economy(2543,"Kikuyu Express", "Kikuyu-Mombasa", "7", "1,000"));
-        db.addEconomy(new Economy(2544,"Mombasa Express", "Mombasa-Nairobi", "40", "700"));
-        db.addEconomy(new Economy(2545,"Mtito-Andei Express", "Mtito Andei-Mombasa", "50", "500"));*/
+        db.addEconomy(new Economy(2541, "Madaraka Express", "Nairobi-Mombasa", "17", "700"));
+        db.addEconomy(new Economy(2542, "Mariakani Express", "Mariakani-Nairobi", "33", "700"));
+        db.addEconomy(new Economy(2543, "Kikuyu Express", "Kikuyu-Mombasa", "7", "1,000"));
+        db.addEconomy(new Economy(2544, "Mombasa Express", "Mombasa-Nairobi", "40", "700"));
+        db.addEconomy(new Economy(2545, "Mtito-Andei Express", "Mtito Andei-Mombasa", "50", "500"));
 
 
 
@@ -87,12 +87,12 @@ import java.util.List;
         Log.d("Reading: ", "Reading all users...");*/
 
         /*List<Login> login = db.getAllLogin();
-        Log.d("Reading: ", "Reading all logins...");
+        Log.d("Reading: ", "Reading all logins...");*/
 
 
         List<Economy> economy = db.getAllEconomy();
         Log.d("Reading: ", "Reading all trains...");
-*/
+
 
 
        /* for (Contacts cn : contacts) {
@@ -118,13 +118,14 @@ import java.util.List;
             String log = "id: " + cn.getId() + " ,Password: " + cn.getPassword();
 
             Log.d("login ", log);
-        }
+        }*/
 
         for (Economy cn : economy) {
             String log = "train_id: " + cn.getId() + ",Train: " + cn.getTrain() + " ,Destination: "
                     + cn.getDestination() + " ,Seats: " + cn.getSeats() + " ,Price: " + cn.getPrice();
 
             Log.d("economy ", log);
-        }*/
+        }
 
-
+    }
+}

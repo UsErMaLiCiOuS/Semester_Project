@@ -62,14 +62,12 @@ public class UserListActivity extends AppCompatActivity{
         textViewName.setText(emailFromIntent);
 
         getDataFromSQLite();
+
     }
 
-    /**
-     * This method is to fetch all user records from SQLite
-     */
+
     @SuppressLint("StaticFieldLeak")
     private void getDataFromSQLite() {
-        // AsyncTask is used that SQLite operation not blocks the UI Thread.
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
@@ -78,6 +76,7 @@ public class UserListActivity extends AppCompatActivity{
 
                 return null;
             }
+
 
             @Override
             protected void onPostExecute(Void aVoid) {

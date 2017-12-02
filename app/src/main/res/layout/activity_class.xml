@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nestedScrollView"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:paddingBottom="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="20dp"
+    tools:context="forfendsec.com.sgr.ClassSelection"
     android:padding="20dp">
 
     <TextView
@@ -25,9 +35,10 @@
         android:layout_marginLeft="18dp"
         android:layout_marginStart="18dp"
         android:layout_marginTop="102dp"
-        android:text="@string/Economy_Class" />
+        android:text="@string/Economy_Class"
+        android:background="@color/colorTextHint"/>
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/buttonFirst"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,6 +46,8 @@
         android:layout_alignBottom="@+id/buttonEconomy"
         android:layout_alignEnd="@+id/textView"
         android:layout_alignRight="@+id/textView"
-        android:text="@string/First_Class" />
+        android:text="@string/First_Class"
+        android:background="@color/colorTextHint"
+        />
 
 </RelativeLayout>

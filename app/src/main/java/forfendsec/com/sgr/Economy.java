@@ -1,7 +1,10 @@
 package forfendsec.com.sgr;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -9,64 +12,116 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Joshua Munaweza on 11/17/17.
  */
 
-/*public class Economy extends AppCompatActivity {
+public class Economy extends AppCompatActivity implements View.OnClickListener {
 
 
-    private final AppCompatActivity activity = Login.this;
-
-    private NestedScrollView nestedScrollView;
-
-    private TextInputLayout textInputLayoutEmail;
-    private TextInputLayout textInputLayoutPassword;
-
-    private TextInputEditText textInputEditTextEmail;
-    private TextInputEditText textInputEditTextPassword;
-
-    private AppCompatButton Login;
-
-    private AppCompatTextView Create;
-
-    private InputValidation inputValidation;
+    private AppCompatActivity activity = forfendsec.com.sgr.Economy.this;
+    private RecyclerView recyclerViewTrains;
+    private List<Economy> trainList;
+    private EconomyAdapter economyRecyclerAdapter;
     private DBHandler databaseHelper;
 
+
+    private AppCompatTextView booking;
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_economy);
-
-        getSupportActionBar().hide();
-
+        getSupportActionBar().setTitle("");
         initViews();
         initListeners();
         initObjects();
 
-        Button login_button = (Button) findViewById(R.id.Login);
-        login_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Login.this, Home.class));
-            }
-        });
-
-        Button create_button = (Button) findViewById(R.id.Create);
-        create_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Login.this, Signup.class));
-            }
-        });
     }
+
+
+    private void initListeners() {
+        booking.setOnClickListener(this);
+
+    }
+
+    private void initViews() {
+
+        recyclerViewTrains = (RecyclerView) findViewById(R.id.recyclerViewTrains);
+        booking = (AppCompatTextView) findViewById(R.id.textViewSeats);
+        booking = (AppCompatTextView) findViewById(R.id.textViewPrice);
+        booking = (AppCompatTextView) findViewById(R.id.textViewTrainDestination);
+        booking = (AppCompatTextView) findViewById(R.id.textViewTrainName);
+    }
+
+
+    private void initObjects() {
+        trainList = new ArrayList<>();
+        economyRecyclerAdapter = new EconomyAdapter(trainList);
+
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerViewTrains.setLayoutManager(mLayoutManager);
+        recyclerViewTrains.setItemAnimator(new DefaultItemAnimator());
+        recyclerViewTrains.setHasFixedSize(true);
+        recyclerViewTrains.setAdapter(economyRecyclerAdapter);
+        databaseHelper = new DBHandler(activity);
+
+        String destinationFromIntent = getIntent().getStringExtra("Destination:");
+        String nameFromIntent = getIntent().getStringExtra("Train:");
+        String priceFromIntent = getIntent().getStringExtra("Price:");
+        String seatsFromIntent = getIntent().getStringExtra("Seats:");
+
+        booking.setText(nameFromIntent);
+        booking.setText(destinationFromIntent);
+        booking.setText(priceFromIntent);
+        booking.setText(seatsFromIntent);
+
+
+        getDataFromSQLite();
+
+    }
+
+
+    @SuppressLint("StaticFieldLeak")
+    private void getDataFromSQLite() {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                trainList.clear();
+                trainList.addAll(databaseHelper.getAllEconomy());
+
+                return null;
+            }
+
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                economyRecyclerAdapter.notifyDataSetChanged();
+            }
+        }.execute();
+    }
+
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
 
     int _train_id;
     String train;
@@ -92,6 +147,7 @@ import java.util.List;
     public Economy() {
 
     }
+
 
     public int getId() {
         return this._train_id;
@@ -132,87 +188,6 @@ import java.util.List;
     public void setPrice(String price) {
         this.price = price;
     }
+
+
 }
-
-
-
-    private void initViews() {
-
-        nestedScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
-
-        textInputLayoutEmail = (TextInputLayout) findViewById(R.id.textInputLayoutEmail);
-        textInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayoutPassword);
-
-        textInputEditTextEmail = (TextInputEditText) findViewById(R.id.textInputEditTextEmail);
-        textInputEditTextPassword = (TextInputEditText) findViewById(R.id.textInputEditTextPassword);
-
-        Login = (AppCompatButton) findViewById(R.id.Login);
-
-        Create = (AppCompatTextView) findViewById(R.id.Create);
-
-
-    }
-
-
-    private void initListeners() {
-        Login.setOnClickListener(this);
-        Create.setOnClickListener(this);
-    }
-
-
-    private void initObjects() {
-        databaseHelper = new DBHandler(activity);
-        inputValidation = new InputValidation(activity);
-
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.Login:
-                verifyFromSQLite();
-                break;
-            case R.id.Create:
-
-                Intent intentRegister = new Intent(getApplicationContext(), Signup.class);
-                startActivity(intentRegister);
-                break;
-        }
-    }
-
-
-    private void verifyFromSQLite() {
-        if (!inputValidation.isInputEditTextFilled(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) {
-            return;
-        }
-        if (!inputValidation.isInputEditTextEmail(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) {
-            return;
-        }
-        if (!inputValidation.isInputEditTextFilled(textInputEditTextPassword, textInputLayoutPassword, getString(R.string.error_message_email))) {
-            return;
-        }
-
-        if (databaseHelper.checkUser(textInputEditTextEmail.getText().toString().trim()
-                , textInputEditTextPassword.getText().toString().trim())) {
-
-
-            Intent accountsIntent = new Intent(activity, UserListActivity.class);
-            accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
-            emptyInputEditText();
-            startActivity(accountsIntent);
-
-
-        } else {
-
-            Snackbar.make(nestedScrollView, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show();
-        }
-    }
-
-
-    private void emptyInputEditText() {
-        textInputEditTextEmail.setText(null);
-        textInputEditTextPassword.setText(null);
-    }
-}*/
-

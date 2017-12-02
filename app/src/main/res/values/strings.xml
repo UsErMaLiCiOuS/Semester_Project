@@ -29,6 +29,8 @@
     <string name="Price" translatable="false">Price</string>
     <string name="Select_Class" translatable="false">Select Class</string>
     <string name="InputValidation" translatable="false">Input Validation</string>
+    <string name="Booking">Booking</string>
+    <string name="Available_Trains">Available Trains</string>
 
 
 
@@ -49,7 +51,7 @@
     <string name="text_not_member" translatable="false"><b>Click Here</b> to Create Account</string>
     <string name="text_already_member" translatable="false">Already a member? Login</string>
     <string name="error_email_exists" translatable="false">Email Already Exists</string>
-    <string name="error_password_match" translatable="false">Password Does Not Matches</string>
+    <string name="error_password_match" translatable="false">Password Does Not Match</string>
     <string name="error_valid_email_password" translatable="false">Wrong Email or Password</string>
     <string name="text_hello" translatable="false">Hello,</string>
 

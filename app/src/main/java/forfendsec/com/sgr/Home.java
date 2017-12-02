@@ -18,7 +18,7 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        ImageButton logout_button = (ImageButton) findViewById(R.id.iconLogout);
+        ImageButton logout_button = findViewById(R.id.iconLogout);
         logout_button.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -27,10 +27,10 @@ public class Home extends AppCompatActivity {
                 startActivity(logout);
             }
         });
-    }
-}
 
-        /*ImageButton ticket_button = (ImageButton) findViewById(R.id.iconTicket);
+
+
+        ImageButton ticket_button = findViewById(R.id.iconTicket);
         ticket_button.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -41,4 +41,3 @@ public class Home extends AppCompatActivity {
         });
     }
 }
-*/
