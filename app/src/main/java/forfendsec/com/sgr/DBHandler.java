@@ -1,6 +1,7 @@
 package forfendsec.com.sgr;
 
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -143,6 +144,7 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_ID, login.getId());
         values.put(KEY_NAME, login.getName());
+        values.put(KEY_EMAIL, login.getEmail());
         values.put(KEY_PASSWORD, login.getPassword());
 
         sqLiteDatabase.insert(TABLE_LOGIN, null, values);
@@ -305,8 +307,8 @@ public class DBHandler extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-
-        Cursor cursor = db.query(TABLE_LOGIN, columns,null, null, null, null, sortOrder);
+        String selectQuery = "SELECT * FROM " + TABLE_ECONOMY;
+        Cursor cursor = db.rawQuery(selectQuery, null);
 
 
 
@@ -328,42 +330,27 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     public List<Economy> getAllEconomy() {
-        String[] columns = {
-                KEY_ID,
-                KEY_TRAIN,
-                KEY_DESTINATION,
-                KEY_PRICE,
-                KEY_SEAT
-        };
+            List<Economy> economyList = new ArrayList<Economy>();
 
-        String sortOrder =
-                KEY_TRAIN + " ASC";
-        List<Economy> economyList = new ArrayList<>();
+            String selectQuery = "SELECT * FROM " + TABLE_ECONOMY;
 
-        SQLiteDatabase db = this.getReadableDatabase();
+            SQLiteDatabase db = this.getWritableDatabase();
+             Cursor cursor = db.rawQuery(selectQuery, null);
 
+            if (cursor.moveToFirst()) {
+                do {
+                    Economy economy = new Economy();
+                    economy.setId(Integer.parseInt(cursor.getString(0)));
+                    economy.setTrain(cursor.getString(1));
+                    economy.setDestination(cursor.getString(2));
+                    economy.setPrice(cursor.getString(3));
+                    economy.setSeats(cursor.getString(4));
 
-        Cursor cursor = db.query(TABLE_ECONOMY, columns,null, null, null, null, sortOrder);
-
-
-
-        if (cursor.moveToFirst()) {
-            do {
-                Economy economy = new Economy();
-                economy.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))));
-                economy.setTrain(cursor.getString(cursor.getColumnIndex(KEY_TRAIN)));
-                economy.setDestination(cursor.getString(cursor.getColumnIndex(KEY_DESTINATION)));
-                economy.setPrice(cursor.getString(cursor.getColumnIndex(KEY_PRICE)));
-                economy.setSeats(cursor.getString(cursor.getColumnIndex(KEY_SEAT)));
-
-                economyList.add(economy);
-            } while (cursor.moveToNext());
+                    economyList.add(economy);
+                } while (cursor.moveToNext());
+            }
+            return economyList;
         }
-        cursor.close();
-        db.close();
-
-        return economyList;
-    }
 
     /*public int getContactsCount() {
         String countQuery = "SELECT * FROM " + TABLE_CONTACTS;

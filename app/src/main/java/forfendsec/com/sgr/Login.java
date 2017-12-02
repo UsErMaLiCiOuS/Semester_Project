@@ -13,6 +13,8 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,6 +23,8 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+
+import java.util.List;
 
 
 public class Login extends AppCompatActivity implements View.OnClickListener{
@@ -44,6 +48,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
     private AdView mAdView;
     private Button btnFullscreenAd;
+
+    private RecyclerView recyclerViewTrains;
+    private List<Economy> economyList;
+    private EconomyAdapter economyRecyclerAdapter;
+
 
 
     @Override
@@ -83,6 +92,29 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
             }
         });
+
+        DBHandler db = new DBHandler(this);
+
+
+        db.addEconomy(new Economy(2541, "Madaraka Express", "Nairobi-Mombasa", "17", "700"));
+        db.addEconomy(new Economy(2542, "Mariakani Express", "Mariakani-Nairobi", "33", "700"));
+        db.addEconomy(new Economy(2543, "Kikuyu Express", "Kikuyu-Mombasa", "7", "1,000"));
+        db.addEconomy(new Economy(2544, "Mombasa Express", "Mombasa-Nairobi", "40", "700"));
+
+
+
+
+        List<Economy> economy = db.getAllEconomy();
+        Log.d("Reading: ", "Reading all trains...");
+
+        for (Economy cn : economy) {
+            String log = "train_id: " + cn.getId() + ",Train: " + cn.getTrain() + " ,Destination: "
+                    + cn.getDestination() + " ,Seats: " + cn.getSeats() + " ,Price: " + cn.getPrice();
+
+            Log.d("economy ", log);
+        }
+
+
 
         mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().addTestDevice

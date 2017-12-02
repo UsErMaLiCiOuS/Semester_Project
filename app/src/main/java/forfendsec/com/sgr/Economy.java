@@ -1,25 +1,16 @@
 package forfendsec.com.sgr;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,12 +24,13 @@ public class Economy extends AppCompatActivity implements View.OnClickListener {
 
     private AppCompatActivity activity = forfendsec.com.sgr.Economy.this;
     private RecyclerView recyclerViewTrains;
-    private List<Economy> trainList;
+    private List<Economy> economyList;
     private EconomyAdapter economyRecyclerAdapter;
     private DBHandler databaseHelper;
 
 
     private AppCompatTextView booking;
+
 
 
     @Override
@@ -49,6 +41,28 @@ public class Economy extends AppCompatActivity implements View.OnClickListener {
         initViews();
         initListeners();
         initObjects();
+
+
+        /*DBHandler db = new DBHandler(this);
+
+
+        db.addEconomy(new Economy(2541, "Madaraka Express", "Nairobi-Mombasa", "17", "700"));
+        db.addEconomy(new Economy(2542, "Mariakani Express", "Mariakani-Nairobi", "33", "700"));
+        db.addEconomy(new Economy(2543, "Kikuyu Express", "Kikuyu-Mombasa", "7", "1,000"));
+        db.addEconomy(new Economy(2544, "Mombasa Express", "Mombasa-Nairobi", "40", "700"));
+
+
+
+
+        List<Economy> economy = db.getAllEconomy();
+        Log.d("Reading: ", "Reading all trains...");
+
+        for (Economy cn : economy) {
+            String log = "train_id: " + cn.getId() + ",Train: " + cn.getTrain() + " ,Destination: "
+                    + cn.getDestination() + " ,Seats: " + cn.getSeats() + " ,Price: " + cn.getPrice();
+
+            Log.d("economy ", log);
+        }*/
 
     }
 
@@ -69,8 +83,8 @@ public class Economy extends AppCompatActivity implements View.OnClickListener {
 
 
     private void initObjects() {
-        trainList = new ArrayList<>();
-        economyRecyclerAdapter = new EconomyAdapter(trainList);
+        economyList = new ArrayList<>();
+        economyRecyclerAdapter = new EconomyAdapter(economyList);
 
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -96,13 +110,15 @@ public class Economy extends AppCompatActivity implements View.OnClickListener {
     }
 
 
-    @SuppressLint("StaticFieldLeak")
+
+
+
+
     private void getDataFromSQLite() {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                trainList.clear();
-                trainList.addAll(databaseHelper.getAllEconomy());
+                economyList.clear();economyList.addAll(databaseHelper.getAllEconomy());
 
                 return null;
             }
