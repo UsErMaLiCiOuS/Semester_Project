@@ -69,12 +69,12 @@ public class MainActivity extends AppCompatActivity {
         db.addLogin(new Login(34456653, "Battlefield3Rules"));*/
 
 
-        db.addEconomy(new Economy(2541, "Madaraka Express", "Nairobi-Mombasa", "17", "700"));
-        db.addEconomy(new Economy(2542, "Mariakani Express", "Mariakani-Nairobi", "33", "700"));
-        db.addEconomy(new Economy(2543, "Kikuyu Express", "Kikuyu-Mombasa", "7", "1,000"));
-        db.addEconomy(new Economy(2544, "Mombasa Express", "Mombasa-Nairobi", "40", "700"));
-        db.addEconomy(new Economy(2545, "Mtito-Andei Express", "Mtito Andei-Mombasa", "50", "500"));
-
+        /*db.addEconomy(new EconomyClassModel(2541, "Madaraka Express", "Nairobi-Mombasa", "17", "700"));
+        db.addEconomy(new EconomyClassModel(2542, "Mariakani Express", "Mariakani-Nairobi", "33", "700"));
+        db.addEconomy(new EconomyClassModel(2543, "Kikuyu Express", "Kikuyu-Mombasa", "7", "1,000"));
+        db.addEconomy(new EconomyClassModel(2544, "Mombasa Express", "Mombasa-Nairobi", "40", "700"));
+        db.addEconomy(new EconomyClassModel(2545, "Mtito-Andei Express", "Mtito Andei-Mombasa", "50", "500"));
+*/
 
 
         /*List<Contacts> contacts = db.getAllContacts();
@@ -90,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d("Reading: ", "Reading all logins...");*/
 
 
-        List<Economy> economy = db.getAllEconomy();
-        Log.d("Reading: ", "Reading all trains...");
+       /* List<EconomyClassModel> economy = db.getAllEconomy();
+        Log.d("Reading: ", "Reading all trains...");*/
 
 
 
@@ -120,12 +120,12 @@ public class MainActivity extends AppCompatActivity {
             Log.d("login ", log);
         }*/
 
-        for (Economy cn : economy) {
+        /*for (Economy cn : economy) {
             String log = "train_id: " + cn.getId() + ",Train: " + cn.getTrain() + " ,Destination: "
                     + cn.getDestination() + " ,Seats: " + cn.getSeats() + " ,Price: " + cn.getPrice();
 
             Log.d("economy ", log);
-        }
+        }*/
 
     }
 }

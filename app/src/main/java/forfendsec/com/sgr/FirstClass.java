@@ -1,5 +1,9 @@
 package forfendsec.com.sgr;
 
+/**
+ * Created by Joshua Munaweza on 12/15/17.
+ */
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -12,70 +16,45 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Joshua Munaweza on 11/17/17.
- */
-
-public class Economy extends AppCompatActivity implements View.OnClickListener {
+public class FirstClass extends AppCompatActivity implements View.OnClickListener {
 
 
-    private AppCompatActivity activity = forfendsec.com.sgr.Economy.this;
+    private AppCompatActivity activity = forfendsec.com.sgr.FirstClass.this;
     private RecyclerView recyclerViewTrains;
-    private List<EconomyClassModel> economyClassModelList;
-    private EconomyAdapter economyRecyclerAdapter;
+    private List<FirstClassModel> firstClassModelList;
+    private FirstClassAdapter firstClassRecyclerAdapter;
     private DBHandler databaseHelper;
 
 
     private AppCompatTextView booking;
 
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_economy);
+        setContentView(R.layout.activity_firstclass);
         getSupportActionBar().setTitle("");
         initViews();
         initListeners();
         initObjects();
 
-        ImageButton economyButton = findViewById(R.id.book);
-        economyButton.setOnClickListener(new View.OnClickListener() {
+        ImageButton firstClassButton = findViewById(R.id.book);
+        firstClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent book = new Intent(Economy.this, Home.class);
+                Intent book = new Intent(FirstClass.this, Home.class);
                 startActivity(book);
 
             }
         });
 
-
-        /*DBHandler db = new DBHandler(this);
-
-
-        db.addEconomy(new Economy(2541, "Madaraka Express", "Nairobi-Mombasa", "17", "700"));
-        db.addEconomy(new Economy(2542, "Mariakani Express", "Mariakani-Nairobi", "33", "700"));
-        db.addEconomy(new Economy(2543, "Kikuyu Express", "Kikuyu-Mombasa", "7", "1,000"));
-        db.addEconomy(new Economy(2544, "Mombasa Express", "Mombasa-Nairobi", "40", "700"));
-
-
-
-
-        List<Economy> economy = db.getAllEconomy();
-        Log.d("Reading: ", "Reading all trains...");
-
-        for (Economy cn : economy) {
-            String log = "train_id: " + cn.getId() + ",Train: " + cn.getTrain() + " ,Destination: "
-                    + cn.getDestination() + " ,Seats: " + cn.getSeats() + " ,Price: " + cn.getPrice();
-
-            Log.d("economy ", log);
-        }*/
 
     }
 
@@ -96,15 +75,15 @@ public class Economy extends AppCompatActivity implements View.OnClickListener {
 
 
     private void initObjects() {
-        economyClassModelList = new ArrayList<>();
-        economyRecyclerAdapter = new EconomyAdapter(economyClassModelList);
+        firstClassModelList = new ArrayList<>();
+        firstClassRecyclerAdapter = new FirstClassAdapter(firstClassModelList);
 
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerViewTrains.setLayoutManager(mLayoutManager);
         recyclerViewTrains.setItemAnimator(new DefaultItemAnimator());
         recyclerViewTrains.setHasFixedSize(true);
-        recyclerViewTrains.setAdapter(economyRecyclerAdapter);
+        recyclerViewTrains.setAdapter(firstClassRecyclerAdapter);
         databaseHelper = new DBHandler(activity);
 
         String destinationFromIntent = getIntent().getStringExtra("Destination:");
@@ -123,13 +102,16 @@ public class Economy extends AppCompatActivity implements View.OnClickListener {
     }
 
 
+
+
+
+
     @SuppressLint("StaticFieldLeak")
     private void getDataFromSQLite() {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                economyClassModelList.clear();
-                economyClassModelList.addAll(databaseHelper.getAllEconomy());
+                firstClassModelList.clear();firstClassModelList.addAll(databaseHelper.getAllFirstClass());
 
                 return null;
             }
@@ -138,11 +120,10 @@ public class Economy extends AppCompatActivity implements View.OnClickListener {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                economyRecyclerAdapter.notifyDataSetChanged();
+                firstClassRecyclerAdapter.notifyDataSetChanged();
             }
         }.execute();
     }
-
 
     @Override
     public void onClick(View view) {

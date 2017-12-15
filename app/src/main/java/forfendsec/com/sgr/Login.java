@@ -96,22 +96,39 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         DBHandler db = new DBHandler(this);
 
 
-        db.addEconomy(new Economy(2541, "Madaraka Express", "Nairobi-Mombasa", "17", "700"));
-        db.addEconomy(new Economy(2542, "Mariakani Express", "Mariakani-Nairobi", "33", "700"));
-        db.addEconomy(new Economy(2543, "Kikuyu Express", "Kikuyu-Mombasa", "7", "1,000"));
-        db.addEconomy(new Economy(2544, "Mombasa Express", "Mombasa-Nairobi", "40", "700"));
+        db.addFirstClass(new FirstClassModel(2541, "Madaraka Express", "Nairobi-Mombasa", "17", "1500"));
+        db.addFirstClass(new FirstClassModel(2542, "Mariakani Express", "Mariakani-Nairobi", "33", "1500"));
+        db.addFirstClass(new FirstClassModel(2543, "Kikuyu Express", "Kikuyu-Mombasa", "7", "2,500"));
+        db.addFirstClass(new FirstClassModel(2544, "Mombasa Express", "Mombasa-Nairobi", "40", "1,500"));
+        db.addFirstClass(new FirstClassModel(2545, "Mtito-Andei Express", "Mtito Andei-Mombasa", "50", "850"));
+
+        db.addEconomy(new EconomyClassModel(2541, "Madaraka Express", "Nairobi-Mombasa", "17", "700"));
+        db.addEconomy(new EconomyClassModel(2542, "Mariakani Express", "Mariakani-Nairobi", "33", "700"));
+        db.addEconomy(new EconomyClassModel(2543, "Kikuyu Express", "Kikuyu-Mombasa", "7", "1,000"));
+        db.addEconomy(new EconomyClassModel(2544, "Mombasa Express", "Mombasa-Nairobi", "40", "700"));
+        db.addEconomy(new EconomyClassModel(2545, "Mtito-Andei Express", "Mtito Andei-Mombasa", "50", "500"));
 
 
 
 
-        List<Economy> economy = db.getAllEconomy();
+        List<FirstClassModel> firstClassModelList = db.getAllFirstClass();
         Log.d("Reading: ", "Reading all trains...");
 
-        for (Economy cn : economy) {
+        List<EconomyClassModel> economyClassModelList = db.getAllEconomy();
+        Log.d("Reading: ", "Reading all trains...");
+
+        for (FirstClassModel cn : firstClassModelList) {
             String log = "train_id: " + cn.getId() + ",Train: " + cn.getTrain() + " ,Destination: "
                     + cn.getDestination() + " ,Seats: " + cn.getSeats() + " ,Price: " + cn.getPrice();
 
-            Log.d("economy ", log);
+            Log.d("firstclass ", log);
+        }
+
+        for (EconomyClassModel cn : economyClassModelList) {
+            String log = "train_id: " + cn.getId() + ",Train: " + cn.getTrain() + " ,Destination: "
+                    + cn.getDestination() + " ,Seats: " + cn.getSeats() + " ,Price: " + cn.getPrice();
+
+            Log.d("economyclass ", log);
         }
 
 

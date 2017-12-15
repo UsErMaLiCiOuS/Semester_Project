@@ -30,5 +30,15 @@ public class ClassSelection extends AppCompatActivity{
             }
         });
 
+        Button firstclass_button = (Button) findViewById(R.id.buttonFirstClass);
+        firstclass_button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent first = new Intent(ClassSelection.this, FirstClass.class);
+                startActivity(first);
+            }
+        });
+
     }
 }

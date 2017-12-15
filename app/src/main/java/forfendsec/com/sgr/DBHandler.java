@@ -29,6 +29,8 @@ public class DBHandler extends SQLiteOpenHelper {
     //private static final String TABLE_SIGNUP = "signup";
     private static final String TABLE_LOGIN = "login";
     private static final String TABLE_ECONOMY ="economy";
+    private static final String TABLE_FIRSTCLASS ="firstclass";
+
 
 
     private static final String KEY_ID = "id";
@@ -75,6 +77,11 @@ public class DBHandler extends SQLiteOpenHelper {
             + " TEXT," + KEY_DESTINATION + " TEXT," + KEY_SEAT + " TEXT,"
             + KEY_PRICE + " TEXT" + ")";
 
+    private static final String CREATE_TABLE_FIRSTCLASS = "CREATE TABLE "
+            + TABLE_FIRSTCLASS + "(" + KEY_TRAIN_ID + " INTEGER PRIMARY KEY," + KEY_TRAIN
+            + " TEXT," + KEY_DESTINATION + " TEXT," + KEY_SEAT + " TEXT,"
+            + KEY_PRICE + " TEXT" + ")";
+
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -87,6 +94,7 @@ public class DBHandler extends SQLiteOpenHelper {
         //sqLiteDatabase.execSQL(CREATE_TABLE_SIGNUP);
         sqLiteDatabase.execSQL(CREATE_TABLE_LOGIN);
         sqLiteDatabase.execSQL(CREATE_TABLE_ECONOMY);
+        sqLiteDatabase.execSQL(CREATE_TABLE_FIRSTCLASS);
     }
 
     @Override
@@ -97,6 +105,8 @@ public class DBHandler extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_SIGNUP);*/
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_LOGIN);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_ECONOMY);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_FIRSTCLASS);
+
 
         onCreate(sqLiteDatabase);
 
@@ -152,17 +162,32 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
-    public void addEconomy(Economy economy) {
+    public void addEconomy(EconomyClassModel economyClassModel) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_TRAIN_ID, economy.getId());
-        values.put(KEY_TRAIN, economy.getTrain());
-        values.put(KEY_DESTINATION, economy.getDestination());
-        values.put(KEY_SEAT, economy.getSeats());
-        values.put(KEY_PRICE, economy.getPrice());
+        values.put(KEY_TRAIN_ID, economyClassModel.getId());
+        values.put(KEY_TRAIN, economyClassModel.getTrain());
+        values.put(KEY_DESTINATION, economyClassModel.getDestination());
+        values.put(KEY_SEAT, economyClassModel.getSeats());
+        values.put(KEY_PRICE, economyClassModel.getPrice());
 
         sqLiteDatabase.insert(TABLE_ECONOMY, null, values);
+        sqLiteDatabase.close();
+    }
+
+
+    public void addFirstClass(FirstClassModel firstclassmodel) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_TRAIN_ID, firstclassmodel.getId());
+        values.put(KEY_TRAIN, firstclassmodel.getTrain());
+        values.put(KEY_DESTINATION, firstclassmodel.getDestination());
+        values.put(KEY_SEAT, firstclassmodel.getSeats());
+        values.put(KEY_PRICE, firstclassmodel.getPrice());
+
+        sqLiteDatabase.insert(TABLE_FIRSTCLASS, null, values);
         sqLiteDatabase.close();
     }
 
@@ -212,7 +237,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }*/
 
 
-    public Economy getEconomy(int id) {
+    public EconomyClassModel getEconomy(int id) {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -221,10 +246,25 @@ public class DBHandler extends SQLiteOpenHelper {
             cursor.moveToFirst();
 
 
-        Economy economy = new Economy(parseInt(cursor.getString(0)),
+        EconomyClassModel economyClassModel = new EconomyClassModel(parseInt(cursor.getString(0)),
                 cursor.getString(1),cursor.getString(2), cursor.getString(3),cursor.getString(4));
 
-        return economy;
+        return economyClassModel;
+    }
+
+    public FirstClassModel getFirstClass(int id) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_FIRSTCLASS, new String[]{KEY_TRAIN_ID, KEY_PRICE}, KEY_TRAIN_ID + "+?", new String[]{String.valueOf(id)}, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+
+        FirstClassModel firstClassModel = new FirstClassModel(parseInt(cursor.getString(0)),
+                cursor.getString(1),cursor.getString(2), cursor.getString(3),cursor.getString(4));
+
+        return firstClassModel;
     }
 
     /*public List<Contacts> getAllContacts() {
@@ -329,8 +369,8 @@ public class DBHandler extends SQLiteOpenHelper {
         return loginList;
     }
 
-    public List<Economy> getAllEconomy() {
-            List<Economy> economyList = new ArrayList<Economy>();
+    public List<EconomyClassModel> getAllEconomy() {
+            List<EconomyClassModel> economyClassModelList = new ArrayList<EconomyClassModel>();
 
             String selectQuery = "SELECT * FROM " + TABLE_ECONOMY;
 
@@ -339,18 +379,42 @@ public class DBHandler extends SQLiteOpenHelper {
 
             if (cursor.moveToFirst()) {
                 do {
-                    Economy economy = new Economy();
-                    economy.setId(Integer.parseInt(cursor.getString(0)));
-                    economy.setTrain(cursor.getString(1));
-                    economy.setDestination(cursor.getString(2));
-                    economy.setPrice(cursor.getString(3));
-                    economy.setSeats(cursor.getString(4));
+                    EconomyClassModel economyClassModel = new EconomyClassModel();
+                    economyClassModel.setId(Integer.parseInt(cursor.getString(0)));
+                    economyClassModel.setTrain(cursor.getString(1));
+                    economyClassModel.setDestination(cursor.getString(2));
+                    economyClassModel.setPrice(cursor.getString(3));
+                    economyClassModel.setSeats(cursor.getString(4));
 
-                    economyList.add(economy);
+                    economyClassModelList.add(economyClassModel);
                 } while (cursor.moveToNext());
             }
-            return economyList;
+            return economyClassModelList;
         }
+
+
+    public List<FirstClassModel> getAllFirstClass() {
+        List<FirstClassModel> firstClassModelList = new ArrayList<FirstClassModel>();
+
+        String selectQuery = "SELECT * FROM " + TABLE_FIRSTCLASS;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                FirstClassModel firstClassModel = new FirstClassModel();
+                firstClassModel.setId(Integer.parseInt(cursor.getString(0)));
+                firstClassModel.setTrain(cursor.getString(1));
+                firstClassModel.setDestination(cursor.getString(2));
+                firstClassModel.setPrice(cursor.getString(3));
+                firstClassModel.setSeats(cursor.getString(4));
+
+                firstClassModelList.add(firstClassModel);
+            } while (cursor.moveToNext());
+        }
+        return firstClassModelList;
+    }
 
     /*public int getContactsCount() {
         String countQuery = "SELECT * FROM " + TABLE_CONTACTS;
@@ -390,6 +454,16 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public int getEconomyCount() {
         String countQuery = "SELECT * FROM " + TABLE_ECONOMY;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        cursor.close();
+
+        return cursor.getCount();
+    }
+
+
+    public int getFirstClassCount() {
+        String countQuery = "SELECT * FROM " + TABLE_FIRSTCLASS;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         cursor.close();
@@ -442,16 +516,28 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public int updateEconomy(Economy economy) {
+    public int updateEconomy(EconomyClassModel economyClassModel) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_TRAIN, economy.getTrain());
-        values.put(KEY_DESTINATION, economy.getDestination());
-        values.put(KEY_SEAT, economy.getSeats());
-        values.put(KEY_PRICE, economy.getPrice());
+        values.put(KEY_TRAIN, economyClassModel.getTrain());
+        values.put(KEY_DESTINATION, economyClassModel.getDestination());
+        values.put(KEY_SEAT, economyClassModel.getSeats());
+        values.put(KEY_PRICE, economyClassModel.getPrice());
 
-        return db.update(TABLE_ECONOMY, values, KEY_TRAIN_ID + "-?", new String[]{String.valueOf(economy.getId())});
+        return db.update(TABLE_ECONOMY, values, KEY_TRAIN_ID + "-?", new String[]{String.valueOf(economyClassModel.getId())});
+    }
+
+    public int updateFirstClass(FirstClassModel firstClassModel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_TRAIN, firstClassModel.getTrain());
+        values.put(KEY_DESTINATION, firstClassModel.getDestination());
+        values.put(KEY_SEAT, firstClassModel.getSeats());
+        values.put(KEY_PRICE, firstClassModel.getPrice());
+
+        return db.update(TABLE_FIRSTCLASS, values, KEY_TRAIN_ID + "-?", new String[]{String.valueOf(firstClassModel.getId())});
     }
 
     public boolean checkUser(String email) {
@@ -556,9 +642,16 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteEconomy(Economy economy) {
+    public void deleteEconomy(EconomyClassModel economyClassModel) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_ECONOMY, KEY_TRAIN_ID + "= ?", new String[]{String.valueOf(economy.getId())});
+        db.delete(TABLE_ECONOMY, KEY_TRAIN_ID + "= ?", new String[]{String.valueOf(economyClassModel.getId())});
+
+        db.close();
+    }
+
+    public void deleteFirstClass(FirstClassModel firstClassModel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_FIRSTCLASS, KEY_TRAIN_ID + "= ?", new String[]{String.valueOf(firstClassModel.getId())});
 
         db.close();
     }

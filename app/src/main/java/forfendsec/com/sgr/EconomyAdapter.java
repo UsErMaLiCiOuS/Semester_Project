@@ -14,9 +14,9 @@ import java.util.List;
  */
 
 public class EconomyAdapter extends RecyclerView.Adapter<EconomyAdapter.UserViewHolder> {
-    private List<Economy> trainList;
+    private List<EconomyClassModel> trainList;
 
-    public EconomyAdapter(List<Economy> trainList) {
+    public EconomyAdapter(List<EconomyClassModel> trainList) {
         this.trainList = trainList;
     }
 
@@ -34,7 +34,7 @@ public class EconomyAdapter extends RecyclerView.Adapter<EconomyAdapter.UserView
     @Override
     public void onBindViewHolder(UserViewHolder holder, int position) {
 
-        holder.textViewId.setText(trainList.get(position).getId());
+        /*holder.textViewId.setText(trainList.get(Integer.parseInt(null)).getId());*/
         holder.textViewTrainDestination.setText(trainList.get(position).getDestination());
         holder.textViewPrice.setText(trainList.get(position).getPrice());
         holder.textViewSeats.setText(trainList.get(position).getSeats());
