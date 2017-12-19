@@ -41,21 +41,6 @@
             android:id="@+id/textViewSeats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <ImageButton
-            android:id="@+id/book"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="100dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="50dp"
-            android:contentDescription="@string/Book"
-            android:src="@android:drawable/checkbox_on_background"
-            android:layout_marginRight="40dp"
-            android:layout_marginLeft="50dp" />
-
-
-
 
     </android.support.v7.widget.LinearLayoutCompat>
 

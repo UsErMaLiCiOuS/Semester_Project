@@ -45,16 +45,6 @@ public class FirstClass extends AppCompatActivity implements View.OnClickListene
         initListeners();
         initObjects();
 
-        ImageButton firstClassButton = findViewById(R.id.book);
-        firstClassButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent book = new Intent(FirstClass.this, Home.class);
-                startActivity(book);
-
-            }
-        });
-
 
     }
 

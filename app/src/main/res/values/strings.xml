@@ -1,3 +1,4 @@
+
 <resources>
     <string name="app_name" translatable="false">SGR_Kenya</string>
     <string name="action_settings">Settings</string>
@@ -32,6 +33,8 @@
     <string name="Booking">Booking</string>
     <string name="Available_Trains">Available Trains</string>
     <string name="Book">Book</string>
+    <string name="Stations">Stations</string>
+    <string name="submitStation">Submit Station</string>
 
 
 
@@ -55,6 +58,16 @@
     <string name="error_password_match" translatable="false">Password Does Not Match</string>
     <string name="error_valid_email_password" translatable="false">Wrong Email or Password</string>
     <string name="text_hello" translatable="false">Hello,</string>
+
+
+    <string name="station_prompt">Choose a station</string>
+    <string-array name="stationList">
+        <item>Madaraka Station</item>
+        <item>Mariakani Station</item>
+        <item>Kikuyu Station</item>
+        <item>Mombasa Station</item>
+        <item>Mtitio-Andei Station</item>
+    </string-array>
 
 
     <string name="title_activity_second_activity">Interstitial</string>

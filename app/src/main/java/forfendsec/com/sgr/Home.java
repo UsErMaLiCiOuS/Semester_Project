@@ -39,5 +39,15 @@ public class Home extends AppCompatActivity {
                 startActivity(book);
             }
         });
+
+        ImageButton station_button = findViewById(R.id.iconStation);
+        station_button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent station = new Intent(Home.this, Stations.class);
+                startActivity(station);
+            }
+        });
     }
 }

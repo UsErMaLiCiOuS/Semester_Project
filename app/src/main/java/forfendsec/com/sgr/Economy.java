@@ -45,16 +45,6 @@ public class Economy extends AppCompatActivity implements View.OnClickListener {
         initListeners();
         initObjects();
 
-        ImageButton economyButton = findViewById(R.id.book);
-        economyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent book = new Intent(Economy.this, Home.class);
-                startActivity(book);
-
-            }
-        });
-
 
         /*DBHandler db = new DBHandler(this);
 
