@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/colorBackground"
+    android:background="@color/material_blue_grey_50"
     android:orientation="vertical">
 
     <Spinner
@@ -12,19 +12,20 @@
         android:layout_height="wrap_content"
         android:entries="@array/stationList"
         android:prompt="@string/station_prompt"
-        android:popupBackground="@color/colorBackground"/>
+        android:popupBackground="@color/Text"/>
 
     <Spinner
         android:id="@+id/spinnerSub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:popupBackground="@color/colorBackground"/>
+        android:popupBackground="@color/Text"/>
 
 
     <Button
         android:id="@+id/station"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/submitStation" />
+        android:text="@string/submitStation"
+        android:textColor="@color/Text" />
 
 </LinearLayout>

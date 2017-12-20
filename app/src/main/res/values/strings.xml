@@ -21,7 +21,7 @@
     <string name="Login_Activity" translatable="false">Login</string>
     <string name="Home_Activity" translatable="false">Home</string>
     <string name="Create_Account_Activity" translatable="false">Create Account</string>
-    <string name="Class_select_prompt" translatable="false">Please select a class of choice!</string>
+    <string name="Class_select_prompt" translatable="false">Please select Ticket Class!</string>
     <string name="Economy_Class" translatable="false">Economy Class</string>
     <string name="First_Class" translatable="false">First Class</string>
     <string name="Train" translatable="false">Train</string>

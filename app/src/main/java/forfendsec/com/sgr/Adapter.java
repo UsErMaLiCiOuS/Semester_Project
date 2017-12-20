@@ -19,9 +19,9 @@ import android.widget.TextView;
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.UserViewHolder> {
-    private List<Login> loginList;
+    private List<LoginModel> loginList;
 
-    public Adapter(List<Login> loginList) {
+    public Adapter(List<LoginModel> loginModelListList) {
         this.loginList = loginList;
     }
 

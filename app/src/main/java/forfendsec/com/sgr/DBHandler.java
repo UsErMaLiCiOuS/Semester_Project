@@ -148,14 +148,14 @@ public class DBHandler extends SQLiteOpenHelper {
         sqLiteDatabase.close();
     }*/
 
-    public void addLogin(Login login) {
+    public void addLogin(LoginModel loginModel) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_ID, login.getId());
-        values.put(KEY_NAME, login.getName());
-        values.put(KEY_EMAIL, login.getEmail());
-        values.put(KEY_PASSWORD, login.getPassword());
+        values.put(KEY_ID, loginModel.getId());
+        values.put(KEY_NAME, loginModel.getName());
+        values.put(KEY_EMAIL, loginModel.getEmail());
+        values.put(KEY_PASSWORD, loginModel.getPassword());
 
         sqLiteDatabase.insert(TABLE_LOGIN, null, values);
         sqLiteDatabase.close();
@@ -333,7 +333,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return signupList;
     }*/
 
-    public List<Login> getAllLogin() {
+    public List<LoginModel> getAllLogin() {
         String[] columns = {
                 KEY_ID,
                 KEY_EMAIL,
@@ -343,7 +343,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         String sortOrder =
                 KEY_NAME + " ASC";
-        List<Login> loginList = new ArrayList<Login>();
+        List<LoginModel> loginModelList = new ArrayList<LoginModel>();
 
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -354,19 +354,19 @@ public class DBHandler extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                Login login = new Login();
-                login.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))));
-                login.setName(cursor.getString(cursor.getColumnIndex(KEY_NAME)));
-                login.setEmail(cursor.getString(cursor.getColumnIndex(KEY_EMAIL)));
-                login.setPassword(cursor.getString(cursor.getColumnIndex(KEY_PASSWORD)));
+                LoginModel loginModel = new LoginModel();
+                loginModel.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))));
+                loginModel.setName(cursor.getString(cursor.getColumnIndex(KEY_NAME)));
+                loginModel.setEmail(cursor.getString(cursor.getColumnIndex(KEY_EMAIL)));
+                loginModel.setPassword(cursor.getString(cursor.getColumnIndex(KEY_PASSWORD)));
 
-                loginList.add(login);
+                loginModelList.add(loginModel);
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
 
-        return loginList;
+        return loginModelList;
     }
 
     public List<EconomyClassModel> getAllEconomy() {
@@ -504,15 +504,15 @@ public class DBHandler extends SQLiteOpenHelper {
         return db.update(TABLE_SIGNUP, values, KEY_ID + "-?", new String[]{String.valueOf(signup.getId())});
     }*/
 
-    public void updateLogin(Login login) {
+    public void updateLogin(LoginModel loginModel) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, login.getName());
-        values.put(KEY_EMAIL, login.getEmail());
-        values.put(KEY_PASSWORD, login.getPassword());
+        values.put(KEY_NAME, loginModel.getName());
+        values.put(KEY_EMAIL, loginModel.getEmail());
+        values.put(KEY_PASSWORD, loginModel.getPassword());
 
-        db.update(TABLE_LOGIN, values, KEY_ID + " = ?", new String[]{String.valueOf(login.getId())});
+        db.update(TABLE_LOGIN, values, KEY_ID + " = ?", new String[]{String.valueOf(loginModel.getId())});
         db.close();
     }
 
@@ -635,9 +635,9 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }*/
 
-    public void deleteLogin(Login login) {
+    public void deleteLogin(LoginModel loginModel) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_LOGIN, KEY_ID + "= ?", new String[]{String.valueOf(login.getId())});
+        db.delete(TABLE_LOGIN, KEY_ID + "= ?", new String[]{String.valueOf(loginModel.getId())});
 
         db.close();
     }

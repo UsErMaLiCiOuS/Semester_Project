@@ -38,9 +38,11 @@ public class Stations extends Activity{
 
             spinnerSub = (Spinner) findViewById(R.id.spinnerSub);
             List<String> list = new ArrayList<String>();
-            list.add("list 1");
-            list.add("list 2");
-            list.add("list 3");
+            list.add("Select Region");
+            list.add("Western Province");
+            list.add("Eastern Province");
+            list.add("Northern Province");
+            list.add("Southern Province");
             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                     android.R.layout.simple_spinner_item, list);
             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

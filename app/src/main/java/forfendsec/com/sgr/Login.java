@@ -108,13 +108,19 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         db.addEconomy(new EconomyClassModel(2544, "Mombasa Express", "Mombasa-Nairobi", "40", "700"));
         db.addEconomy(new EconomyClassModel(2545, "Mtito-Andei Express", "Mtito Andei-Mombasa", "50", "500"));
 
-
+        db.addLogin(new LoginModel(30335245,"Joshua Munaweza","joshua.munaweza@strathmore.edu","pass"));
+        db.addLogin(new LoginModel(30321245, "nasanrm"));
+        db.addLogin(new LoginModel(33567632,"Djdemakufu254"));
+        db.addLogin(new LoginModel(34456653, "Battlefield3Rules"));
 
 
         List<FirstClassModel> firstClassModelList = db.getAllFirstClass();
         Log.d("Reading: ", "Reading all trains...");
 
         List<EconomyClassModel> economyClassModelList = db.getAllEconomy();
+        Log.d("Reading: ", "Reading all trains...");
+
+        List<LoginModel> loginModelList = db.getAllLogin();
         Log.d("Reading: ", "Reading all trains...");
 
         for (FirstClassModel cn : firstClassModelList) {
@@ -129,6 +135,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                     + cn.getDestination() + " ,Seats: " + cn.getSeats() + " ,Price: " + cn.getPrice();
 
             Log.d("economyclass ", log);
+        }
+
+        for (LoginModel cn : loginModelList) {
+            String log = "train_id: " + cn.getId() + ",Train: " + cn.getName() + " ,Destination: "
+                    + cn.getEmail() + " ,Seats: " + cn.getPassword() + " ,Price: " + cn.getId();
+
+            Log.d("firstclass ", log);
         }
 
 
@@ -178,50 +191,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         }
     });
     }
-
-
-
-
-    private int id;
-    private String name;
-    private String email;
-    private String password;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-
-
-
 
 
 

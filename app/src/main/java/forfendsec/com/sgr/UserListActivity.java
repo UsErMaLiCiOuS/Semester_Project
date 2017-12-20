@@ -27,7 +27,7 @@ public class UserListActivity extends AppCompatActivity{
     private AppCompatActivity activity = UserListActivity.this;
     private AppCompatTextView textViewName;
     private RecyclerView recyclerViewUsers;
-    private List<Login> loginList;
+    private List<LoginModel> loginModelList;
     private Adapter usersRecyclerAdapter;
     private DBHandler databaseHelper;
 
@@ -48,8 +48,8 @@ public class UserListActivity extends AppCompatActivity{
 
 
     private void initObjects() {
-        loginList = new ArrayList<>();
-        usersRecyclerAdapter = new Adapter(loginList);
+        loginModelList = new ArrayList<>();
+        usersRecyclerAdapter = new Adapter(loginModelList);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerViewUsers.setLayoutManager(mLayoutManager);
@@ -71,8 +71,8 @@ public class UserListActivity extends AppCompatActivity{
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                loginList.clear();
-                loginList.addAll(databaseHelper.getAllLogin());
+                loginModelList.clear();
+                loginModelList.addAll(databaseHelper.getAllLogin());
 
                 return null;
             }

@@ -44,7 +44,7 @@ public class Signup extends AppCompatActivity implements View.OnClickListener{
 
     private InputValidation inputValidation;
     private DBHandler databaseHelper;
-    private Login login;
+    private LoginModel loginModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -107,7 +107,7 @@ public class Signup extends AppCompatActivity implements View.OnClickListener{
     private void initObjects() {
         inputValidation = new InputValidation(activity);
         databaseHelper = new DBHandler(activity);
-        login = new Login();
+        loginModel = new LoginModel();
 
     }
 
@@ -147,11 +147,11 @@ public class Signup extends AppCompatActivity implements View.OnClickListener{
 
         if (!databaseHelper.checkUser(textInputEditTextEmail.getText().toString().trim())) {
 
-            login.setName(textInputEditTextName.getText().toString().trim());
-            login.setEmail(textInputEditTextEmail.getText().toString().trim());
-            login.setPassword(textInputEditTextPassword.getText().toString().trim());
+            loginModel.setName(textInputEditTextName.getText().toString().trim());
+            loginModel.setEmail(textInputEditTextEmail.getText().toString().trim());
+            loginModel.setPassword(textInputEditTextPassword.getText().toString().trim());
 
-            databaseHelper.addLogin(login);
+            databaseHelper.addLogin(loginModel);
 
             Snackbar.make(nestedScrollView, getString(R.string.success_message), Snackbar.LENGTH_LONG).show();
             emptyInputEditText();
